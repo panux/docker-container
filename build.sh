@@ -3,7 +3,7 @@ pkgsource="https://github.com/panux/packages-main.git"
 
 function buildpackage() {
 	local ret=$1
-	local retval=$(docker run --rm -v $(realpath packages):/build panux/package-builder /build/$1.pkgen | grep transfer.sh)
+	local retval=$(docker run --rm -v $PWD/packages:/build panux/package-builder /build/$1.pkgen | grep transfer.sh)
 	eval $ret="'$retval'"
 }
 
