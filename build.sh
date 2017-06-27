@@ -1,4 +1,4 @@
-packages=(basefs busybox)
+packages=(basefs busybox musl)
 pkgsource="https://github.com/panux/packages-main.git"
 
 function buildpackage() {
