@@ -1,22 +1,16 @@
-packages=(basefs busybox musl)
-pkgsource="https://github.com/panux/packages-main.git"
+packages=(basefs busybox musl libgpg-error libassuan libgcrypt zlib libintl gnupg shpkg)
+repo="https://repo.projectpanux.com/beta"
 
-function buildpackage() {
-	local ret=$1
-	local retval=$(docker run --rm -v $PWD/packages:/build panux/package-builder /build/$1.pkgen | grep $ret.tar.xz)
-	eval $ret="'$retval'"
-}
+gpg --keyserver pgp.mit.edu --recv-keys DD8203F5 || { echo "error fetching pgp key"; exit 1; }
 
-function pullpackage() {
-	local pkg=$1
-	local pkglnk=$1
-	eval pkglnk=\$$pkglnk
-	wget $pkglnk -O $pkg.tar.xz
+function fetchpackage() {
+	wget $repo/pkgs/$pkg.tar.xz -O packages/$pkg.tar.xz
+	wget $repo/pkgs/$pkg.sig -O packages/$pkg.sig
+	gpg2 --verify packages/$pkg.sig packages/$pkg.tar.xz || { echo "verification error"; exit 1; }
 }
 
 function extractpackage() {
-	local pkg=$1
-	tar -xvf $pkg.tar.xz --exclude ./.pkginfo -C build
+	tar -xf packages/$1.tar.xz --exclude ./.pkginfo -C build
 }
 
 function runonall() {
@@ -34,15 +28,16 @@ function cleanup() {
 
 trap cleanup EXIT
 mkdir build
-git clone $pkgsource packages
+mkdir packages
 
 echo Packages:
 runonall 'echo -e \t'
-echo Generating packages. . .
-runonall buildpackage
-echo Pulling packages. . .
-runonall pullpackage
+echo Downloading and verifying packages. . .
+runonall fetchpackage
 echo Extracting packages. . .
 runonall extractpackage
+
+printf "%s\n" "${packages[@]}" > build/etc/shpkg/pkgs.list
+
 echo Building container. . .
 docker build -t panux/panux .
