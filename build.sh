@@ -29,17 +29,13 @@ function cleanup() {
 }
 
 trap cleanup EXIT
-mkdir build
-mkdir packages
+mkdir build packages
 
 echo Packages:
 runonall 'echo -e \t'
-echo Downloading and verifying packages. . .
 runonall fetchpackage
-echo Extracting packages. . .
 runonall extractpackage
 
 printf "%s\n" "${packages[@]}" > build/etc/shpkg/pkgs.list
 
-echo Building container. . .
 docker build -t panux/panux .
