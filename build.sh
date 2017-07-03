@@ -2,11 +2,12 @@ packages=(basefs busybox musl libgpg-error libassuan libgcrypt zlib libintl gnup
 repo="https://repo.projectpanux.com/beta"
 
 gpg --keyserver pgp.mit.edu --recv-keys DD8203F5 || { echo "error fetching pgp key"; exit 1; }
+expect -c "spawn gpg --homedir out/shpkg/etc/shpkg/gpg --edit-key DD8203F5 0 --yes trust quit; expect \"Your decision? \" { send \"5\r\" }; expect \"Do you really want to set this key to ultimate trust? (y/N) \" { send \"y\r\" }; interact"
 
 function fetchpackage() {
 	wget $repo/pkgs/$pkg.tar.xz -O packages/$pkg.tar.xz
 	wget $repo/pkgs/$pkg.sig -O packages/$pkg.sig
-	gpg2 --verify packages/$pkg.sig packages/$pkg.tar.xz || { echo "verification error"; exit 1; }
+	gpgv packages/$pkg.sig packages/$pkg.tar.xz || { echo "verification error"; exit 1; }
 }
 
 function extractpackage() {
