@@ -5,6 +5,7 @@ cp ~/.gnupg/pubring.gpg ~/.gnupg/trustedkeys.gpg
 git clone https://github.com/panux/shpkg.git
 mkdir build
 export ROOTFS=$(pwd)/build
+echo $ROOTFS
 chmod 700 shpkg/shpkg.sh
 shpkg/shpkg.sh bootstrap $(pwd)/shpkg
 
