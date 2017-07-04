@@ -8,5 +8,4 @@ export ROOTFS=$(realpath build)
 chmod 700 shpkg/shpkg.sh
 shpkg/shpkg.sh bootstrap $(realpath shpkg)
 
-echo Building container. . .
 docker build -t panux/panux .
