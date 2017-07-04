@@ -4,8 +4,8 @@ cp ~/.gnupg/pubring.gpg ~/.gnupg/trustedkeys.gpg
 
 git clone https://github.com/panux/shpkg.git
 mkdir build
-export ROOTFS=$(realpath build)
+export ROOTFS=$(pwd)/build
 chmod 700 shpkg/shpkg.sh
-shpkg/shpkg.sh bootstrap $(realpath shpkg)
+shpkg/shpkg.sh bootstrap $(pwd)/shpkg
 
 docker build -t panux/panux .
