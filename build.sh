@@ -7,6 +7,6 @@ mkdir build
 export ROOTFS=$(pwd)/build
 echo $ROOTFS
 chmod 700 shpkg/shpkg.sh
-shpkg/shpkg.sh bootstrap $(pwd)/shpkg
+sh shpkg/shpkg.sh bootstrap $(pwd)/shpkg
 
 docker build -t panux/panux .
