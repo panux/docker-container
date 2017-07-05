@@ -3,6 +3,7 @@ addons:
   apt:
     packages:
     - expect
+    - lua5.3
 services:
   - docker
 script:
