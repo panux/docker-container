@@ -8,10 +8,16 @@ echo $ROOTFS
 chmod 700 lpkg/lpkg.sh
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86_64 https://repo.projectpanux.com/beta/x86_64/pkgs/
+lpkg/lpkg.lua bootstrap $(pwd)/build-alpha https://repo.projectpanux.com/alpha/x86_64/pkgs/
 
 mv build-x86 build
 docker build -t panux/panux:x86 .
 mv build build-x86
+
 mv build-x86_64 build
 docker build -t panux/panux:x86_64 .
 mv build build-x86_64
+
+mv build-alpha build
+docker build -t panux/panux:alpha .
+mv build build-alpha
