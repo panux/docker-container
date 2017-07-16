@@ -10,7 +10,7 @@ lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86_64 https://repo.projectpanux.com/beta/x86_64/pkgs/
 lpkg/lpkg.lua bootstrap $(pwd)/build-alpha https://repo.projectpanux.com/alpha/x86_64/pkgs/
 echo 'REPO=http://repo.projectpanux.com/alpha/x86_64/pkgs/' > build-alpha/etc/lpkg/lpkg.conf
-echo 'GPGDIR=/etc/lpkg/gpg' > build-alpha/etc/lpkg/lpkg.conf
+echo 'GPGDIR=/etc/lpkg/gpg' >> build-alpha/etc/lpkg/lpkg.conf
 
 mv build-x86 build
 docker build -t panux/panux:x86 .
