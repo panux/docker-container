@@ -3,7 +3,7 @@ expect -c "spawn gpg --edit-key DD8203F5 trust quit; expect \"Your decision? \" 
 cp ~/.gnupg/pubring.gpg ~/.gnupg/trustedkeys.gpg
 
 git clone https://github.com/panux/lpkg.git
-mkdir build-x86 build-x86_64
+mkdir build-x86 build-x86_64 build-alpha
 echo $ROOTFS
 chmod 700 lpkg/lpkg.sh
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
