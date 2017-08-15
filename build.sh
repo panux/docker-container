@@ -3,14 +3,11 @@ expect -c "spawn gpg --edit-key DD8203F5 trust quit; expect \"Your decision? \" 
 cp ~/.gnupg/pubring.gpg ~/.gnupg/trustedkeys.gpg
 
 git clone https://github.com/panux/lpkg.git
-mkdir build-x86 build-x86_64 build-alpha
+mkdir build-x86 build-x86_64
 echo $ROOTFS
 chmod 700 lpkg/lpkg.sh
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
 lpkg/lpkg.lua bootstrap $(pwd)/build-x86_64 https://repo.projectpanux.com/beta/x86_64/pkgs/
-lpkg/lpkg.lua bootstrap $(pwd)/build-alpha https://repo.projectpanux.com/alpha/x86_64/pkgs/
-echo 'REPO=http://repo.projectpanux.com/alpha/x86_64/pkgs/' > build-alpha/etc/lpkg/lpkg.conf
-echo 'GPGDIR=/etc/lpkg/gpg' >> build-alpha/etc/lpkg/lpkg.conf
 
 mv build-x86 build
 docker build -t panux/panux:x86 .
@@ -19,7 +16,3 @@ mv build build-x86
 mv build-x86_64 build
 docker build -t panux/panux:x86_64 .
 mv build build-x86_64
-
-mv build-alpha build
-docker build -t panux/panux:alpha .
-mv build build-alpha
