@@ -6,12 +6,12 @@ git clone https://github.com/panux/lpkg.git
 mkdir build-x86 build-x86_64
 echo $ROOTFS
 chmod 700 lpkg/lpkg.sh
-lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
-lpkg/lpkg.lua bootstrap $(pwd)/build-x86_64 https://repo.projectpanux.com/beta/x86_64/pkgs/
+#lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
+lpkg/lpkg.lua bootstrap repo.projectpanux.com beta x86_64 $(pwd)/build-x86_64
 
-mv build-x86 build
-docker build -t panux/panux:x86 .
-mv build build-x86
+#mv build-x86 build
+#docker build -t panux/panux:x86 .
+#mv build build-x86
 
 mv build-x86_64 build
 docker build -t panux/panux:x86_64 .
