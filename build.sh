@@ -5,7 +5,7 @@ cp ~/.gnupg/pubring.gpg ~/.gnupg/trustedkeys.gpg
 git clone https://github.com/panux/lpkg.git
 mkdir build-x86 build-x86_64
 echo $ROOTFS
-chmod 700 lpkg/lpkg.sh
+chmod 700 lpkg/lpkg.lua
 #lpkg/lpkg.lua bootstrap $(pwd)/build-x86 https://repo.projectpanux.com/beta/x86/pkgs/
 lpkg/lpkg.lua bootstrap repo.projectpanux.com beta x86_64 $(pwd)/build-x86_64
 
