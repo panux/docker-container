@@ -1,4 +1,4 @@
-all: minisign
+all: minisign lua
 
 libsodium-1.0.13.tar.gz:
 	wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz
@@ -30,3 +30,13 @@ minisign: minisign-0.7/build/Makefile
 	$(MAKE) -C minisign-0.7/build
 	$(MAKE) -C minisign-0.7/build install
 	touch minisign
+
+lua-5.3.4.tar.gz:
+	wget https://www.lua.org/ftp/lua-5.3.4.tar.gz
+
+lua-5.3.4: lua-5.3.4.tar.gz
+	tar -xvf lua-5.3.4.tar.gz
+
+lua:
+	$(MAKE) -C lua-5.3.4 linux install
+	touch lua
