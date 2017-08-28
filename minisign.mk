@@ -37,6 +37,6 @@ lua-5.3.4.tar.gz:
 lua-5.3.4: lua-5.3.4.tar.gz
 	tar -xvf lua-5.3.4.tar.gz
 
-lua:
+lua: lua-5.3.4
 	$(MAKE) -C lua-5.3.4 linux install
 	touch lua
