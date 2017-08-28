@@ -2,8 +2,6 @@ language: bash
 addons:
   apt:
     packages:
-    - expect
-    - lua5.2
 services:
   - docker
 script:
