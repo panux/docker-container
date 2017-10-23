@@ -1,4 +1,5 @@
 git clone https://github.com/panux/lpkg.git
+git -C lpkg checkout df435cfcacf7c0ee1ccfc8480cc9e8282f2b2665
 echo $ROOTFS
 chmod 700 lpkg/lpkg.lua
 lua lpkg/lpkg.lua bootstrap "repo.projectpanux.com" beta x86 "$(pwd)/build-x86" || exit 1
