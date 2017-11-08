@@ -6,6 +6,8 @@ services:
   - docker
 script:
   - sudo make -j20 -f minisign.mk
+  - rm /bin/sh
+  - ln -s /bin/bash /bin/sh
   - sudo ldconfig
   - bash build.sh
 after_success:
