@@ -1,7 +1,11 @@
 git clone https://github.com/panux/lpkg.git || exit 1
-git -C lpkg checkout v0.10 || exit 1
+git -C lpkg checkout v0.10.7.3 || exit 1
+mkdir meta-bin || exit 1
+chmod 700 lpkg/alternative.sh || exit 1
+ln -s $(pwd)/lpkg/alternative.sh $(pwd)/meta-bin/lpkg-alt || exit 1
 bd=$PWD
 (
+export PATH=$PATH:$bd/meta-bin
 cd lpkg || exit 1
 make || exit 1
 echo y | ./lpkg.sh bootstrap $bd/build-x86_64 dl.projectpanux.com beta x86_64 || exit 1
